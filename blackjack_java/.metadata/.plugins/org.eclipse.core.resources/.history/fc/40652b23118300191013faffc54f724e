@@ -1,0 +1,68 @@
+package cards;
+
+import org.eclipse.swt.graphics.Image;
+
+public class Card {
+	public Ranks rank;
+	public Suits suit;
+	public Image img;
+	
+	public enum Suits{
+		SPADES,
+		DIAMONDS,
+		HEARTS,
+		CLUBS;
+	}
+	
+	public enum Ranks{
+		TWO, //0
+		THREE, //1
+		FOUR, //2
+		FIVE, //3
+		SIX, //4
+		SEVEN, //5
+		EIGHT, //6
+		NINE, //7
+		TEN, //8
+		JACK, //9
+		QUEEN,
+		KING,
+		ACE;
+	}
+	
+	public Card(Ranks rank, Suits suit, Image i) {
+		this.rank = rank;
+		this.suit = suit;
+		this.img = i;
+	}
+	
+	public int get_rank() {
+		if (this.rank == Ranks.JACK || this.rank == Ranks.QUEEN || this.rank == Ranks.KING){
+			return 10;		
+		}
+		else if (this.rank == Ranks.ACE) {
+			return 1;
+		}
+		else {
+			return this.rank.ordinal() + 2;
+		}
+	}
+	
+	public Suits get_suit() {
+		return this.suit;
+	}
+	
+	public void set_rank(Ranks r) {
+		this.rank = r;
+	}
+	
+	public void set_suit(Suits s) {
+		this.suit = s;
+	}
+	
+	public String toString() {	
+		return this.rank.name() + " OF " + this.suit.name();
+	}
+	
+
+}

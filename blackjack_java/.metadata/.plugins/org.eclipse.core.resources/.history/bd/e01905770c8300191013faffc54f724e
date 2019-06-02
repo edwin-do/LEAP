@@ -1,0 +1,56 @@
+package cards;
+
+import java.util.Random;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import cards.Card.*;
+
+public class Deck {
+	public Card cards[];
+	Random rand = new Random();
+	
+	public Deck() {
+		int i = 0;
+		this.cards = new Card[52];
+		for (Suits s : Suits.values()) {
+			for (Ranks r: Ranks.values()) {
+				String rank = String.valueOf(r.ordinal());
+				System.out.println(rank);
+				String suit = s.toString().toLowerCase();
+				Image img = SWTResourceManager.getImage(Deck.class, "/img/" + rank + "_of_" + suit + ".png");			
+				Card tmp = new Card(r,s,resize(img,100,150));
+				this.cards[i] = tmp;
+				i++;
+			}
+		}
+	}
+	
+	public void shuffle() {
+		for (int i = 0; i < this.cards.length; i++) {
+			int j = rand.nextInt(52);
+			Card tmp = cards[i];
+			this.cards[i] = this.cards[j];
+			this.cards[j] = tmp;
+			
+		}
+	}
+	
+	public Image resize(Image image, int width, int height) {
+		Image scaled = new Image(Display.getDefault(), width, height);
+		GC gc = new GC(scaled);
+		gc.setAntialias(SWT.ON);
+		gc.setInterpolation(SWT.HIGH);
+		gc.drawImage(image, 0, 0, 
+		image.getBounds().width, image.getBounds().height, 
+		0, 0, width, height);
+		gc.dispose();
+		image.dispose(); // don't forget about me!
+		return scaled;
+	}
+
+}

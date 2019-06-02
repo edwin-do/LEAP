@@ -1,0 +1,35 @@
+package cards;
+
+public class card {
+	int rank;
+	Suits suit;
+	
+	public enum Suits{
+		SPADES,
+		DIAMONDS,
+		HEARTS,
+		CLUBS;
+	}
+	
+	public card(int rank, Suits suit) {
+		this.rank = rank;
+		this.suit = suit;
+	}
+	
+	public int get_rank() {
+		return this.rank;
+	}
+	
+	public int get_suit() {
+		return this.suit;
+	}
+	
+	public void set_rank(int r) {
+		this.rank = r;
+	}
+	
+	public void set_suit(Suits s) {
+		this.suit = s;
+	}
+
+}

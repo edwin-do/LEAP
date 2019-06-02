@@ -1,0 +1,46 @@
+package cards;
+
+import java.util.Random;
+
+public class Card {
+	int rank;
+	Suits suit;
+	
+	public enum Suits{
+		SPADES,
+		DIAMONDS,
+		HEARTS,
+		CLUBS;
+	}
+	
+	public enum Ranks{
+		A,2,3,4,5,6,7,8,9,10,J,Q,K;
+	}
+	
+	public Card(int rank, Suits suit) {
+		this.rank = rank;
+		this.suit = suit;
+	}
+	
+	public void randomCard() {
+		Random rand = new Random();
+		this.rank = rand.nextInt(10);
+	}
+	
+	public int get_rank() {
+		return this.rank;
+	}
+	
+	public Suits get_suit() {
+		return this.suit;
+	}
+	
+	public void set_rank(int r) {
+		this.rank = r;
+	}
+	
+	public void set_suit(Suits s) {
+		this.suit = s;
+	}
+
+}

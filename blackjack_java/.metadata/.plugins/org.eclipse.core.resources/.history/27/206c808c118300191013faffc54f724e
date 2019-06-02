@@ -1,0 +1,88 @@
+package gui;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Label;
+import cards.Card;
+import cards.Deck;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+public class Blackjack {
+
+	protected Shell shell;
+	public static Label lblPcard1;
+	public static Label lblPcard2;
+	public static Label lblPcard3;
+	public static Label lblPcard4;
+	public static Label lblPcard5;
+	
+	public static Label lblDcard1;
+	public static Label lblDcard2;
+	public static Label lblDcard3;
+	public static Label lblDcard4;
+	public static Label lblDcard5;
+	
+	public static Deck current_deck;
+
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			Blackjack window = new Blackjack();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Open the window.
+	 */
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		deal();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+	
+	private static void deal() {
+		current_deck = new Deck();
+		current_deck.shuffle();
+		Card pcard1 = current_deck.cards[0];
+		Card pcard2 = current_deck.cards[1];
+		lblPcard1.setImage(pcard1.img);
+		lblPcard2.setImage(pcard2.img);
+		System.out.println(pcard1.toString());
+		
+	}
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shell = new Shell();
+		shell.setSize(671, 552);
+		shell.setText("Blackjack");
+		
+		lblPcard1 = new Label(shell, SWT.WRAP);
+		lblPcard1.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblPcard1.setText("PCard1");
+		lblPcard1.setBounds(170, 63, 111, 182);
+		
+		lblPcard2 = new Label(shell, SWT.WRAP);
+		lblPcard2.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblPcard2.setText("PCard2");
+		lblPcard2.setBounds(27, 63, 111, 182);
+
+	}
+}

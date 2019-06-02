@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+C:\Users\Edwin\Documents\LEAP\Summer 2019\Prototypes\blackjack_java\.metadata\.plugins\org.eclipse.jdt.core
+1662466767.index
+205467800.index
+1896765531.index
+147506196.index

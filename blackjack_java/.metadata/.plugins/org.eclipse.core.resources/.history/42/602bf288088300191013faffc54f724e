@@ -1,0 +1,40 @@
+package cards;
+
+import java.util.Random;
+
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.wb.swt.SWTResourceManager;
+
+import cards.Card.*;
+import gui.Blackjack;
+
+public class Deck {
+	public Card cards[];
+	Random rand = new Random();
+	
+	public Deck() {
+		int i = 0;
+		this.cards = new Card[52];
+		for (Suits s : Suits.values()) {
+			for (Ranks r: Ranks.values()) {
+				String rank = r.toString();
+				String suit = s.toString().toLowerCase();
+				Image i = SWTResourceManager.getImage(Blackjack.class, "/img/" + rank + "_of_" + suit + ".png");
+				Card tmp = new Card(r,s,i);
+				this.cards[i] = tmp;
+				i++;
+			}
+		}
+	}
+	
+	public void shuffle() {
+		for (int i = 0; i < this.cards.length; i++) {
+			int j = rand.nextInt(52);
+			Card tmp = cards[i];
+			this.cards[i] = this.cards[j];
+			this.cards[j] = tmp;
+			
+		}
+	}
+
+}

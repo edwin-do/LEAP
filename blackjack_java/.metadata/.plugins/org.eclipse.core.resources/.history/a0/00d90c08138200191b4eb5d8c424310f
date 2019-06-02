@@ -1,0 +1,8 @@
+package cards;
+
+public class card {
+	public static void get_rank() {
+		
+	}
+
+}

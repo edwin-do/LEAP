@@ -1,0 +1,20 @@
+package cards;
+
+public class card {
+	int rank;
+	int suit;
+	
+	public card(int rank, int suit) {
+		this.rank = rank;
+		this.suit = suit;
+	}
+	
+	public int get_rank() {
+		return this.rank;
+	}
+	
+	public int get_suit() {
+		return this.suit;
+	}
+
+}

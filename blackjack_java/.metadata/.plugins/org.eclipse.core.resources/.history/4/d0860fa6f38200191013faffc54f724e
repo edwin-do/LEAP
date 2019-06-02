@@ -1,0 +1,60 @@
+package cards;
+
+public class Card {
+	Ranks rank;
+	Suits suit;
+	
+	public enum Suits{
+		SPADES,
+		DIAMONDS,
+		HEARTS,
+		CLUBS;
+	}
+	
+	public enum Ranks{
+		TWO,
+		THREE,
+		FOUR,
+		FIVE,
+		SIX,
+		SEVEN,
+		EIGHT,
+		NINE,
+		TEN,
+		JACK,
+		QUEEN,
+		KING,
+		ACE;
+	}
+	
+	public Card(Ranks rank, Suits suit) {
+		this.rank = rank;
+		this.suit = suit;
+	}
+	
+	public int get_rank() {
+		if (this.rank == Ranks.JACK || this.rank == Ranks.QUEEN || this.rank == Ranks.KING){
+			return 10;		
+		}
+		else if (this.rank == Ranks.ACE) {
+			return 1;
+		}
+		else {
+			return this.rank.ordinal() + 2;
+		}
+	}
+	
+	public Suits get_suit() {
+		return this.suit;
+	}
+	
+	public void set_rank(Ranks r) {
+		this.rank = r;
+	}
+	
+	public void set_suit(Suits s) {
+		this.suit = s;
+	}
+	
+
+}

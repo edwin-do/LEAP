@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="cards.card"/>
+    <fullyQualifiedTypeName name="cards.Card.Suits"/>
+    <fullyQualifiedTypeName name="cards.Card.Ranks"/>
+    <fullyQualifiedTypeName name="java.awt.Image"/>
+    <fullyQualifiedTypeName name="org.eclipse.wb.swt.SWTResourceManager"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="org.eclipse.swt.graphics.Image"/>
+    <fullyQualifiedTypeName name="org.eclipse.swt.widgets.MessageBox"/>
+    <fullyQualifiedTypeName name="java.lang.Boolean"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+</qualifiedTypeNameHistroy>

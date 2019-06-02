@@ -1,0 +1,22 @@
+package cards;
+
+import java.util.Random;
+
+import cards.Card.*;
+
+public class Deck {
+	public Card cards[];
+	
+	public Deck() {
+		int i = 0;
+		this.cards = new Card[51];
+		for (Suits s : Suits.values()) {
+			for (Ranks r: Ranks.values()) {
+				Card tmp = new Card(r,s);
+				cards[i] = tmp;
+				i++;
+			}
+		}
+	}
+
+}
