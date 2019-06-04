@@ -1,0 +1,33 @@
+package gui;
+
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+
+public class GameState {
+	boolean win_state = false;
+	public GameState(){	
+	}
+	
+	public boolean checkBust(int points) {
+		if (points > 21) {
+			win_state = false;
+			return true;	
+		}
+		else {
+			win_state = true;
+			return false;
+		}
+		
+	}
+	
+	public void display_win(MessageBox m, Shell s) {
+		balance += (bet*2);
+		m.setMessage("You win");
+		m.open();
+	}
+	
+	public static void display_lose(MessageBox m, Shell s) {
+		m.setMessage("You lose");
+		m.open();
+	}
+}

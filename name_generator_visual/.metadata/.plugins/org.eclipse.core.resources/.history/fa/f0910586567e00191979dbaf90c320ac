@@ -1,0 +1,114 @@
+package gen;
+
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Spinner;
+
+public class Gen {
+
+	protected Shell shlHowMuchWill;
+	private Text txtFirst;
+	private Text txtSecond;
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			Gen window = new Gen();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Open the window.
+	 */
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shlHowMuchWill.open();
+		shlHowMuchWill.layout();
+		while (!shlHowMuchWill.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+	
+	
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shlHowMuchWill = new Shell();
+		shlHowMuchWill.setSize(587, 470);
+		//title
+		shlHowMuchWill.setText("How much will you make?");
+		
+		txtFirst = new Text(shlHowMuchWill, SWT.BORDER);
+		txtFirst.setBounds(293, 92, 147, 26);
+		
+		txtSecond = new Text(shlHowMuchWill, SWT.BORDER);
+		txtSecond.setBounds(293, 124, 147, 26);
+		
+		Label lblFirst = new Label(shlHowMuchWill, SWT.NONE);
+		lblFirst.setBounds(10, 95, 265, 20);
+		lblFirst.setText("Enter your desired hourly salary:");
+		
+		Label lblSecond = new Label(shlHowMuchWill, SWT.NONE);
+		lblSecond.setBounds(10, 121, 216, 20);
+		lblSecond.setText("Enter your annual salary:");
+		
+		
+		Label lblAnswer = new Label(shlHowMuchWill, SWT.NONE);
+		lblAnswer.setBounds(445, 360, 70, 20);
+		lblAnswer.setText("Answer");
+		
+		Button button = new Button(shlHowMuchWill, SWT.NONE);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				int first_number = Integer.parseInt(txtFirst.getText());
+				int second_number = Integer.parseInt(txtSecond.getText());
+				int total = first_number + second_number;
+				
+				
+				lblAnswer.setText(String.valueOf(total));
+			}
+		});
+		button.setBounds(425, 288, 90, 30);
+		button.setText("+");
+		
+		Label lblEnterTheNumber = new Label(shlHowMuchWill, SWT.NONE);
+		lblEnterTheNumber.setBounds(10, 155, 195, 20);
+		lblEnterTheNumber.setText("Enter the number of years:");
+		
+		Label lblEnterTheNumber_1 = new Label(shlHowMuchWill, SWT.NONE);
+		lblEnterTheNumber_1.setText("Enter the number of hours of week you wish to work:");
+		lblEnterTheNumber_1.setBounds(31, 177, 387, 20);
+		
+		Label lblThisAppWill = new Label(shlHowMuchWill, SWT.NONE);
+		lblThisAppWill.setBounds(10, 10, 408, 20);
+		lblThisAppWill.setText("This app will help you calculate your total lifetime income");
+		
+		Button btnRadioButton = new Button(shlHowMuchWill, SWT.RADIO);
+		btnRadioButton.setBounds(31, 50, 111, 20);
+		btnRadioButton.setText("Radio Button");
+		
+		Button btnRadioButton_1 = new Button(shlHowMuchWill, SWT.RADIO);
+		btnRadioButton_1.setBounds(259, 50, 111, 20);
+		btnRadioButton_1.setText("Radio Button");
+
+
+	}
+}

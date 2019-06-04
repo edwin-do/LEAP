@@ -1,0 +1,145 @@
+package gen;
+
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Spinner;
+
+public class Gen {
+
+	protected Shell shlHowMuchWill;
+	private Text txtHour;
+	private Text txtAnnual;
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			Gen window = new Gen();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Open the window.
+	 */
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shlHowMuchWill.open();
+		shlHowMuchWill.layout();
+		while (!shlHowMuchWill.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+	
+	
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shlHowMuchWill = new Shell();
+		shlHowMuchWill.setSize(587, 470);
+		//title
+		shlHowMuchWill.setText("How much will you make?");
+		
+		txtHour = new Text(shlHowMuchWill, SWT.BORDER);
+		txtHour.setEnabled(false);
+		txtHour.setBounds(293, 92, 147, 26);
+		
+		txtAnnual = new Text(shlHowMuchWill, SWT.BORDER);
+		txtAnnual.setEnabled(false);
+		txtAnnual.setBounds(293, 124, 147, 26);
+		
+		Label lblFirst = new Label(shlHowMuchWill, SWT.NONE);
+		lblFirst.setBounds(10, 95, 265, 20);
+		lblFirst.setText("Enter your desired hourly salary:");
+		
+		Label lblSecond = new Label(shlHowMuchWill, SWT.NONE);
+		lblSecond.setBounds(10, 121, 216, 20);
+		lblSecond.setText("Enter your annual salary:");
+		
+		
+		Label lblAnswer = new Label(shlHowMuchWill, SWT.NONE);
+		lblAnswer.setBounds(445, 360, 70, 20);
+		lblAnswer.setText("Answer");
+		
+		Label lblEnterTheNumber = new Label(shlHowMuchWill, SWT.NONE);
+		lblEnterTheNumber.setBounds(10, 169, 195, 20);
+		lblEnterTheNumber.setText("Enter the number of years:");
+		
+		Label lblEnterTheNumber_1 = new Label(shlHowMuchWill, SWT.NONE);
+		lblEnterTheNumber_1.setText("Enter the number of hours of week you wish to work:");
+		lblEnterTheNumber_1.setBounds(10, 199, 365, 20);
+		
+		Label lblThisAppWill = new Label(shlHowMuchWill, SWT.NONE);
+		lblThisAppWill.setBounds(10, 10, 408, 20);
+		lblThisAppWill.setText("This app will help you calculate your total lifetime income");
+		
+		Spinner spinnerYears = new Spinner(shlHowMuchWill, SWT.BORDER);
+		spinnerYears.setEnabled(false);
+		spinnerYears.setBounds(381, 167, 59, 26);
+		
+		Spinner spinnerHours = new Spinner(shlHowMuchWill, SWT.BORDER);
+		spinnerHours.setEnabled(false);
+		spinnerHours.setBounds(381, 199, 59, 26);
+		
+		Button btnHour = new Button(shlHowMuchWill, SWT.RADIO);
+		btnHour.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtHour.setEnabled(true);
+				spinnerHours.setEnabled(true);
+				txtAnnual.setEnabled(false);
+				spinnerYears.setEnabled(false);
+			}
+		});
+		btnHour.setBounds(31, 50, 137, 20);
+		btnHour.setText("By hourly wage");
+		
+		Button btnAnnual = new Button(shlHowMuchWill, SWT.RADIO);
+		btnAnnual.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtHour.setEnabled(false);
+				spinnerHours.setEnabled(false);
+				txtAnnual.setEnabled(true);
+				spinnerYears.setEnabled(true);
+			}
+		});
+		btnAnnual.setBounds(259, 50, 147, 20);
+		btnAnnual.setText("By Annual wage");
+		
+		Button buttonCalc = new Button(shlHowMuchWill, SWT.NONE);
+		buttonCalc.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (btnHour.getEnabled()) {
+					int hour_salary = Integer.parseInt(txtHour.getText());
+					int num_hour = spinnerHours.getDigits()
+					int total = hour_salary + num_hour;
+					lblAnswer.setText(String.valueOf(num_hour));
+					
+				}
+			}
+		});
+		buttonCalc.setBounds(425, 288, 90, 30);
+		buttonCalc.setText("Calculate");
+		
+
+
+
+	}
+}

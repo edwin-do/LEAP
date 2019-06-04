@@ -5,10 +5,13 @@
     <fullyQualifiedTypeName name="cards.Card.Ranks"/>
     <fullyQualifiedTypeName name="java.awt.Image"/>
     <fullyQualifiedTypeName name="org.eclipse.wb.swt.SWTResourceManager"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="org.eclipse.swt.graphics.Image"/>
     <fullyQualifiedTypeName name="org.eclipse.swt.widgets.MessageBox"/>
     <fullyQualifiedTypeName name="java.lang.Boolean"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="gui.GameState"/>
+    <fullyQualifiedTypeName name="cards.Deck"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.eclipse.swt.widgets.Spinner"/>
 </qualifiedTypeNameHistroy>

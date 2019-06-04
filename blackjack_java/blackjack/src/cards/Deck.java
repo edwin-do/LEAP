@@ -14,6 +14,7 @@ import cards.Card.*;
 
 public class Deck {
 	public ArrayList<Card> cards = new ArrayList<Card>();
+	private ArrayList<Card> dispose = new ArrayList<Card>();
 	Random rand = new Random();
 	
 	public Deck() {
@@ -35,17 +36,21 @@ public class Deck {
 		}
 	}
 	
+	public void reset() {
+		for (Card c : dispose) {
+			cards.add(c);
+		}
+	}
+	
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
 	
 	public Card deal() {
 		Card tmp = cards.get(cards.size()-1);
-		cards.remove(cards.size()-1);
+		dispose.add(cards.remove(cards.size()-1));
 		return tmp;	
 	}
-	
-	
 	
 	public Image resize(Image image, int width, int height) {
 		Image scaled = new Image(Display.getDefault(), width, height);

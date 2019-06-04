@@ -1,0 +1,306 @@
+package gui;
+
+import java.util.ArrayList;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+
+import cards.Card;
+import cards.Deck;
+import gui.GameState;
+import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Spinner;
+
+public class Blackjack {
+
+	protected Shell shell;
+	
+	private static GameState current_game = new GameState();
+	private static ArrayList<Card> playerCards = new ArrayList<Card>();
+	private static ArrayList<Card> dealerCards = new ArrayList<Card>();
+	
+	private static int num_playerCards = 0;
+	private static int num_dealerCards = 0;
+	
+
+	
+	public static Label lblPcard1;
+	public static Label lblPcard2;
+	public static Label lblPcard3;
+	public static Label lblPcard4;
+	
+	public static Label lblDcard1;
+	public static Label lblDcard2;
+	public static Label lblDcard3;
+	public static Label lblDcard4;
+	
+	public static Label lblPpoints;
+	public static Label lblDpoints;
+	
+	public static Label lblBalance;
+	public Button btnBet;
+	
+	public static Deck current_deck = new Deck();
+
+
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			Blackjack window = new Blackjack();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Open the window.
+	 */
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+	
+	private static void reset() {
+		
+		playerCards.clear();
+		dealerCards.clear();
+		current_deck.reset();
+		
+		num_playerCards = 0;
+		num_dealerCards = 0;
+		
+		lblPcard3.setVisible(false);
+		lblPcard4.setVisible(false);
+		
+		lblDcard3.setVisible(false);
+		lblDcard4.setVisible(false);
+	}
+	
+	private static void play() {
+		current_deck.shuffle();
+		deal_player(num_playerCards);
+		deal_dealer(num_dealerCards);
+		lblDcard2.setImage(SWTResourceManager.getImage(Blackjack.class, "/img/" + "back_card.png"));
+		current_game.get_player_points(playerCards);
+		current_game.get_dealer_points(dealerCards);
+		updatePoints();
+		
+	}
+	
+	private static void deal_player(int numOfCards) {
+		if (numOfCards == 0) {
+			playerCards.add(current_deck.deal());
+			displayCard(lblPcard1,playerCards.get(0).img);
+			playerCards.add(current_deck.deal());
+			displayCard(lblPcard2,playerCards.get(1).img);
+			num_playerCards+=2;
+		}
+		else if (numOfCards == 2) {
+			playerCards.add(current_deck.deal());
+			displayCard(lblPcard3,playerCards.get(2).img);
+			lblPcard3.setVisible(true);
+			num_playerCards++;
+		}
+		else {
+			playerCards.add(current_deck.deal());
+			displayCard(lblPcard4,playerCards.get(3).img);
+			lblPcard4.setVisible(true);
+			num_playerCards++;
+		}
+
+	}
+	
+	private static void deal_dealer(int numOfCards) {
+		if (numOfCards == 0) {
+			dealerCards.add(current_deck.deal());
+			displayCard(lblDcard1,dealerCards.get(0).img);
+			lblDcard1.setVisible(true);
+			num_dealerCards++;
+		}
+		else if (numOfCards == 1) {
+			dealerCards.add(current_deck.deal());
+			displayCard(lblDcard2,dealerCards.get(1).img);
+			lblDcard2.setVisible(true);
+			num_dealerCards++;
+		}
+		else if (numOfCards == 2) {
+			dealerCards.add(current_deck.deal());
+			displayCard(lblDcard3,dealerCards.get(2).img);
+			lblDcard3.setVisible(true);
+			num_dealerCards++;
+		}
+		else {
+			dealerCards.add(current_deck.deal());
+			displayCard(lblDcard4,dealerCards.get(3).img);
+			lblDcard4.setVisible(true);
+			num_dealerCards++;
+		}
+	}
+	
+	private static void updatePoints() {
+		lblPpoints.setText("Your Points: " + String.valueOf(current_game.player_points));
+		lblDpoints.setText("Dealer Points: " + String.valueOf(current_game.dealer_points));
+	}
+	
+	private static void displayCard(Label lb, Image i) {
+		lb.setImage(i);
+	}
+	
+	private static void new_game() {
+		current_game.balance = 100;
+		lblBalance.setText(String.valueOf(current_game.balance));
+	}
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shell = new Shell();
+		shell.setSize(797, 568);
+		shell.setText("Blackjack");
+		
+		lblPcard1 = new Label(shell, SWT.NONE);
+		lblPcard1.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblPcard1.setBounds(42, 63, 111, 182);
+		
+		lblPcard2 = new Label(shell, SWT.NONE);
+		lblPcard2.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblPcard2.setBounds(159, 63, 111, 182);
+		
+		lblPcard3 = new Label(shell, SWT.NONE);
+		lblPcard3.setVisible(false);
+		lblPcard3.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblPcard3.setBounds(276, 63, 111, 183);
+		
+		lblPcard4 = new Label(shell, SWT.NONE);
+		lblPcard4.setVisible(false);
+		lblPcard4.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblPcard4.setBounds(393, 63, 111, 183);
+		
+		lblDcard1 = new Label(shell, SWT.NONE);
+		lblDcard1.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblDcard1.setBounds(42, 303, 111, 183);
+		
+		lblDcard2 = new Label(shell, SWT.NONE);
+		lblDcard2.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblDcard2.setBounds(159, 303, 111, 183);
+		
+		lblDcard3 = new Label(shell, SWT.NONE);
+		lblDcard3.setVisible(false);
+		lblDcard3.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblDcard3.setBounds(276, 303, 111, 183);
+		
+		lblDcard4 = new Label(shell, SWT.NONE);
+		lblDcard4.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
+		lblDcard4.setBounds(393, 303, 111, 183);
+		lblDcard4.setVisible(false);
+		
+		lblPpoints = new Label(shell, SWT.NONE);
+		lblPpoints.setBounds(337, 32, 167, 25);
+		lblPpoints.setText("Your Points:");
+		
+		lblDpoints = new Label(shell, SWT.NONE);
+		lblDpoints.setText("Dealer Points:");
+		lblDpoints.setBounds(337, 272, 167, 25);
+		
+		Button btnHit = new Button(shell, SWT.NONE);
+		btnHit.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				boolean hit = false;
+				MessageBox dialog = new MessageBox(shell, SWT.ICON_QUESTION | SWT.YES| SWT.NO);
+				MessageBox result = new MessageBox(shell);
+				dialog.setMessage("Do you want another card?");
+				hit = (SWT.YES == dialog.open());
+				while (hit) {
+					dialog.setMessage("Do you want another card?");
+					deal_player(num_playerCards);
+					current_game.get_player_points(playerCards);
+					System.out.println(num_dealerCards);
+					updatePoints();
+					if (current_game.checkBust()) {
+						current_game.display_lose(result,shell);
+						hit = false;
+					}
+					else {
+						hit = (SWT.YES == dialog.open());
+					}
+				}
+			}
+		});
+		btnHit.setBounds(584, 106, 105, 35);
+		btnHit.setText("Hit");
+		
+		Button btnStay = new Button(shell, SWT.NONE);
+		btnStay.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				MessageBox dialog = new MessageBox(shell);
+				while (current_game.dealer_points <= current_game.player_points) {
+					deal_dealer(num_dealerCards);
+					current_game.get_dealer_points(dealerCards);
+					updatePoints();
+				}
+				if (current_game.checkState() == true) {
+					current_game.display_win(dialog,shell);
+				}
+				else {
+					current_game.display_lose(dialog,shell);
+				}
+			}
+		});
+		btnStay.setText("Stay");
+		btnStay.setBounds(584, 167, 105, 35);
+		
+		lblBalance = new Label(shell, SWT.NONE);
+		lblBalance.setAlignment(SWT.CENTER);
+		lblBalance.setBounds(575, 32, 132, 25);
+		lblBalance.setText("Balance: 100");
+		
+		Spinner spinnerBet = new Spinner(shell, SWT.BORDER);
+		spinnerBet.setBounds(584, 311, 72, 31);
+		
+		btnBet = new Button(shell, SWT.NONE);
+		btnBet.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				reset();
+				current_game.bet = spinnerBet.getSelection();
+				current_game.balance -= current_game.bet;
+				lblBalance.setText("Bet: " + String.valueOf(current_game.balance));
+				play();
+			}
+		});
+		btnBet.setBounds(584, 231, 105, 35);
+		btnBet.setText("Bet");
+		
+		Button btnNewGame = new Button(shell, SWT.NONE);
+		btnNewGame.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				new_game();
+			}
+		});
+		btnNewGame.setBounds(584, 378, 105, 35);
+		btnNewGame.setText("New Game");
+
+	}
+}

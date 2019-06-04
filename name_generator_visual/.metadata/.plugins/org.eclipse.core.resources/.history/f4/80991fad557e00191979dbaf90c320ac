@@ -1,0 +1,93 @@
+package gen;
+
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
+public class Gen {
+
+	protected Shell shell;
+	private Text txtFirst;
+	private Text txtSecond;
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			Gen window = new Gen();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Open the window.
+	 */
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+	
+	
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shell = new Shell();
+		shell.setSize(450, 300);
+		//title
+		shell.setText("Simple");
+		
+		txtFirst = new Text(shell, SWT.BORDER);
+		txtFirst.setBounds(10, 48, 147, 26);
+		
+		txtSecond = new Text(shell, SWT.BORDER);
+		txtSecond.setBounds(10, 107, 147, 26);
+		
+		Label lblFirst = new Label(shell, SWT.NONE);
+		lblFirst.setBounds(10, 22, 96, 20);
+		lblFirst.setText("First Number");
+		
+		Label lblSecond = new Label(shell, SWT.NONE);
+		lblSecond.setBounds(10, 81, 126, 20);
+		lblSecond.setText("Second Number");
+		
+		
+		Label lblAnswer = new Label(shell, SWT.NONE);
+		lblAnswer.setBounds(37, 209, 70, 20);
+		lblAnswer.setText("Answer");
+		
+		Button button = new Button(shell, SWT.NONE);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				int first_number = Integer.parseInt(txtFirst.getText());
+				int second_number = Integer.parseInt(txtSecond.getText());
+				int total = first_number + second_number;
+				
+				
+				lblAnswer.setText(String.valueOf(total));
+			}
+		});
+		button.setBounds(0, 153, 90, 30);
+		button.setText("+");
+
+
+	}
+}

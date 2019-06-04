@@ -1,0 +1,30 @@
+package gui;
+
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+
+public class Display {
+	MessageBox result = new MessageBox();
+	public Display() {
+	}
+	
+	public void reset() {
+		
+	}
+	
+	public void displayCard(Label lb, Image i) {
+		lb.setImage(i);
+	}
+	
+	public void display_win(MessageBox m, Shell s) {
+		m.setMessage("You win");
+		m.open();
+	}
+	
+	public void display_lose(MessageBox m, Shell s) {
+		m.setMessage("You lose");
+		m.open();
+	}
+}

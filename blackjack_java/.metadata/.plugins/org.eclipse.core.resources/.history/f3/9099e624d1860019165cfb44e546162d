@@ -1,0 +1,61 @@
+package gui;
+
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+
+import cards.Card;
+import cards.Deck;
+
+public class GameState {
+	boolean win_state = false;
+	public GameState(){	
+	}
+	
+	public boolean checkState() {
+		//false -lose
+		//true - win
+		if (this.checkBust(get_player_points())) {
+			return false;
+		}
+		else if (this.checkBust(get_dealer_points())) {
+			return true;
+		}
+		else if (get_dealer_points() > get_player_points()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	
+	public boolean checkBust(int points) {
+		if (points > 21) {
+			win_state = false;
+			return true;	
+		}
+		else {
+			win_state = true;
+			return false;
+		}
+		
+	}
+	
+	public int get_points(Deck d) {
+		int points = 0;
+		for (Card c: d) {
+			points += c.get_rank();
+		}
+		return points;
+	}
+	
+	public void display_win(MessageBox m, Shell s) {
+		balance += (bet*2);
+		m.setMessage("You win");
+		m.open();
+	}
+	
+	public void display_lose(MessageBox m, Shell s) {
+		m.setMessage("You lose");
+		m.open();
+	}
+}

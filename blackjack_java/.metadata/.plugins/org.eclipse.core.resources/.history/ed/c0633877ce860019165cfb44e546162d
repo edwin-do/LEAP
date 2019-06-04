@@ -1,0 +1,19 @@
+package gui;
+
+public class GameState {
+	boolean win_state = false;
+	public GameState(){	
+	}
+	
+	public static boolean checkBust(int points) {
+		if (points > 21) {
+			win_state = false;
+			return true;	
+		}
+		else {
+			win_state = true;
+			return false;
+		}
+		
+	}
+}

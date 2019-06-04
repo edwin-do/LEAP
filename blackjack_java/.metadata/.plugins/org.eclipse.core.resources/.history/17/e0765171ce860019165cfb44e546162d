@@ -1,0 +1,8 @@
+package gui;
+
+public class GameState {
+	boolean win_state = false;
+	public GameState(){	
+	}
+
+}
